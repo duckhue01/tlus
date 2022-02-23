@@ -1,0 +1,29 @@
+{
+  "name": "tlu_student",
+  "displayName": "TLU student",
+  "expo": {
+    "name": "TLU student",
+    "slug": "tlu_student",
+    "version": "1.0.0",
+    "icon": "./src/assets/images/app_logo.png",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "description": "",
+    "android": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+      }
+    },
+    "ios": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
+      }
+    },
+    "splash": {
+      "image": "./src/assets/images/app_splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}
