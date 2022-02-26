@@ -1,12 +1,12 @@
-import { getTokenAPI } from "../api/authenticationAPI";
-import scoreAPI from "../api/scoreAPI";
+import { getToken } from "../api/authentication";
+import score from "../api/score";
 import { convertSemester } from "../utils/scoreUtils";
 
 export type MarkStats = {
   numberOfMark: number;
   numberOfCredit: number;
   percent: number;
-  details:any[],
+  details: any[],
 };
 
 export default class ScoreService {
@@ -16,8 +16,8 @@ export default class ScoreService {
     if (ScoreService.score) {
       return ScoreService.score;
     } else {
-      const token = await getTokenAPI();
-      const data = await scoreAPI(token);
+      const token = await getToken();
+      const data = await score(token);
 
       if (token !== null && data !== null) {
         const extracted: ScoreModel[] = data.map((e: any) => {
@@ -55,53 +55,48 @@ export default class ScoreService {
         numberOfMark: 0,
         numberOfCredit: 0,
         percent: 0,
-        details:[]
+        details: []
       },
       ["b"]: {
         numberOfMark: 0,
         numberOfCredit: 0,
         percent: 0,
-        details:[]
+        details: []
       },
       ["c"]: {
         numberOfMark: 0,
         numberOfCredit: 0,
         percent: 0,
-        details:[]
+        details: []
       },
       ["d"]: {
         numberOfMark: 0,
         numberOfCredit: 0,
         percent: 0,
-        details:[]
+        details: []
       },
       ["f"]: {
         numberOfMark: 0,
         numberOfCredit: 0,
         percent: 0,
-        details:[]
+        details: []
       },
     };
 
     if (data !== null) {
       data.forEach((e: any) => {
         const current = stats[e.mark.toLowerCase()];
-
-
-
-
-
         const data = {
           numberOfMark: current.numberOfMark + 1,
           numberOfCredit: current.numberOfCredit + e.numberOfCredit,
           percent: 1,
-          details:[
+          details: [
             ...stats[e.mark.toLowerCase()].details,
-              {
-                subject: e.subject,
-                credit: e.numberOfCredit,
-                final: e.final,
-              },
+            {
+              subject: e.subject,
+              credit: e.numberOfCredit,
+              final: e.final,
+            },
           ]
         };
 
@@ -166,20 +161,20 @@ export default class ScoreService {
 
         const detail = stats[e.semester]
           ? [
-              ...stats[e.semester].detail,
-              {
-                subject: e.subject,
-                credit: e.numberOfCredit,
-                final: e.final,
-              },
-            ]
+            ...stats[e.semester].detail,
+            {
+              subject: e.subject,
+              credit: e.numberOfCredit,
+              final: e.final,
+            },
+          ]
           : [
-              {
-                subject: e.subject,
-                credit: e.numberOfCredit,
-                final: e.final,
-              },
-            ];
+            {
+              subject: e.subject,
+              credit: e.numberOfCredit,
+              final: e.final,
+            },
+          ];
         stats = {
           ...stats,
           [e.semester]: {

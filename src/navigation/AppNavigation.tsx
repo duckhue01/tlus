@@ -27,22 +27,23 @@ const AppNavigation = ({ setTheme }: any) => {
           marginVertical: 20,
         }}
       >
-
         <Drawer.Screen
-          name="calendar"
-          component={Calendar}
-          options={{ drawerLabel: "Lịch học" }}
+          name="score"
+          component={Score}
+          options={{ drawerLabel: "Điểm số" }}
         />
+
         <Drawer.Screen
           name="test_schedule"
           component={TestSchedule}
           options={{ drawerLabel: "Lịch thi" }}
         />
         <Drawer.Screen
-          name="score"
-          component={Score}
-          options={{ drawerLabel: "Điểm số" }}
+          name="calendar"
+          component={Calendar}
+          options={{ drawerLabel: "Lịch học" }}
         />
+
 
         <Drawer.Screen
           name="tuition_fee"

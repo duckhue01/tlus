@@ -1,11 +1,10 @@
-const tuitionAPI = async (token: string | null) : Promise<any | null>=> {
+const tuition = async (token: string | null): Promise<any | null> => {
   if (token !== null) {
     const res = await fetch(
-      "https://sinhvien.tlu.edu.vn:8099/education/api/student/viewstudentpayablebyLoginUser",
+      "https://sinhvien.tlu.edu.vn:8082/education/api/student/viewstudentpayablebyLoginUser",
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -13,11 +12,9 @@ const tuitionAPI = async (token: string | null) : Promise<any | null>=> {
     if (res.ok) {
       return await res.json();
     }
-
     return null;
-  } 
-
+  }
   return null;
 };
 
-export default tuitionAPI;
+export default tuition;

@@ -1,11 +1,10 @@
-const scoreAPI = async (token: string | null) : Promise<any | null> => {
+const score = async (token: string | null): Promise<any | null> => {
   if (token !== null) {
     const res = await fetch(
-      "https://sinhvien.tlu.edu.vn:8099/education/api/studentsubjectmark/getListStudentMarkBySemesterByLoginUser/0",
+      "https://sinhvien.tlu.edu.vn:8082/education/api/studentsubjectmark/getListStudentMarkBySemesterByLoginUser/0",
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -22,4 +21,4 @@ const scoreAPI = async (token: string | null) : Promise<any | null> => {
   }
 };
 
-export default scoreAPI;
+export default score;

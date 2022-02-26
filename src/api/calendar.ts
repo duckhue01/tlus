@@ -8,8 +8,8 @@ export interface calendar {
   name: string;
   timetable: [any];
 }
-
-const calendarAPI = async (
+// need to fix server does not allow invalid fetch semester
+const calendar = async (
   token: string | null
 ): Promise<CalendarData | null> => {
   if (token !== null) {
@@ -17,16 +17,14 @@ const calendarAPI = async (
 
     for await (const i of Array.from(new Array(20), (e, a) => 20 - a)) {
       const res = await fetch(
-        `https://sinhvien.tlu.edu.vn:8099/education/api/StudentCourseSubject/studentLoginUser/${i}`,
+        `https://sinhvien.tlu.edu.vn:8082/education/api/StudentCourseSubject/studentLoginUser/6`,
         {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
       if (res.ok) {
         const temp = await res.json();
 
@@ -42,4 +40,4 @@ const calendarAPI = async (
   return null;
 };
 
-export default calendarAPI;
+export default calendar;
