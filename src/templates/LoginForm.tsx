@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { Snackbar, TextInput } from "react-native-paper";
-import { authenticationAPI } from "../api/authenticationAPI";
+import { authentication } from "../api/authentication";
 import { AuthContext } from "../context/AuthContext";
 import { COLORS, FONTS } from "../assets/constants";
 import { UserService } from "../services/UserService";
@@ -31,15 +31,12 @@ const LoginForm = () => {
   const [visible, setVisible] = useState(false);
   const theme = useContext(ThemeContext);
   const LoginHandler = async () => {
-    const token = await authenticationAPI(userName, password);
-    
+    const token = await authentication(userName, password);
+
     if (token) {
-      console.log("in token");
-      
       const ok = await UserService.setInfo(token);
       await UserService.setUserNameAndPassword(userName, password);
-      console.log(ok);
-      
+
       if (ok === true) {
         setIsAccept({
           status: 1,
@@ -73,14 +70,15 @@ const LoginForm = () => {
     }}>
       <Text style={{
         ...FONTS.h4,
-        color: theme!.secondary,
+        color: theme!.graySecondary,
         textTransform: "uppercase",
         fontSize: 12,
       }}>thông tin đăng nhập</Text>
+
       <TextInput
         label="Tên đăng nhập"
         textContentType="username"
-        selectionColor={theme!.primary}
+        selectionColor={theme!.graySecondary}
         keyboardType="numeric"
         onChangeText={(text) => {
           setUserName(text);
@@ -92,14 +90,14 @@ const LoginForm = () => {
         value={userName}
         error={isAccept.status === -1 ? true : false}
         autoFocus={Platform.OS === "ios" ? true : false}
-        theme={{ colors: { primary: theme!.primary } }}
+        theme={{ colors: { primary: theme!.graySecondary } }}
       />
       <View>
         <TextInput
           label="Mật khẩu"
           textContentType="password"
           secureTextEntry={!visible}
-          selectionColor={theme!.primary}
+          selectionColor={theme!.graySecondary}
           onChangeText={(text) => {
             setPassword(text);
             setIsAccept({
@@ -129,7 +127,7 @@ const LoginForm = () => {
           }
           theme={{
             colors: {
-              primary: theme!.primary,
+              primary: theme!.graySecondary,
             },
           }}
         />

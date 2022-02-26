@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ContentLoader, { Rect } from "react-content-loader/native";
 import { View, Text } from "react-native";
 import { List } from "react-native-paper";
-import {  FONTS } from "../assets/constants";
+import { FONTS } from "../assets/constants";
 import MarkIcon from "../assets/svg/MarkIcon";
 import { ThemeContext } from "../context/ThemeContext";
 import DetailTable from "./ScoreDetailTable";
@@ -67,7 +67,9 @@ const AccTitle = ({ title }: { title: number | undefined }) => {
       <Text
         style={{
           ...FONTS.h4,
+          color: theme!.secondary
         }}
+
       >
         {`Tín chỉ tích lũy : ${title}`}
       </Text>

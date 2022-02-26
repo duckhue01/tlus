@@ -1,5 +1,4 @@
-const userAPI = async (token: string): Promise<UserInfo | null> => {
-  console.log("user api");
+const user = async (token: string): Promise<UserInfo | null> => {
 
   const res = await fetch(
     "https://sinhvien.tlu.edu.vn:8082/education/api/student/getstudentbylogin",
@@ -10,7 +9,6 @@ const userAPI = async (token: string): Promise<UserInfo | null> => {
       },
     }
   );
-  // console.log(await res.json());
 
   if (res.ok) {
     const data = await res.json();
@@ -26,4 +24,4 @@ const userAPI = async (token: string): Promise<UserInfo | null> => {
 
 };
 
-export default userAPI;
+export default user;

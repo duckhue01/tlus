@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import userAPI from "../api/userAPI";
+import user from "../api/user";
 
 export class UserService {
   constructor() { }
@@ -9,11 +9,11 @@ export class UserService {
   };
 
   static setInfo = async (token: string): Promise<boolean> => {
-    console.log("in set infor" + token);
 
-    const data = await userAPI(token);
-    console.log(data);
-    
+
+    const data = await user(token);
+
+
 
     if (data !== null) {
       await AsyncStorage.setItem("user_info", JSON.stringify(data));

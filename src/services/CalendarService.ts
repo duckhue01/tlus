@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getTokenAPI } from "../api/authenticationAPI";
-import calendarAPI from "../api/calendarAPI";
+import { getToken } from "../api/authentication";
+import calendar from "../api/calendar";
 import { CalendarData } from "../utils/dateUtils";
 import { UserService } from "./UserService";
 
@@ -24,8 +24,9 @@ class CalendarService {
     if (db !== null) {
       return JSON.parse(db);
     } else {
-      const token = await getTokenAPI();
-      const data = await calendarAPI(token);
+      const token = await getToken();
+      const data = await calendar(token);
+
 
       if (token !== null && data !== null) {
         AsyncStorage.setItem(
@@ -46,8 +47,8 @@ class CalendarService {
   };
 
   static updateCalendar = async () => {
-    const token = await getTokenAPI();
-    const data = await calendarAPI(token);
+    const token = await getToken();
+    const data = await calendar(token);
     const userId = (await this.getUserInfo()).id;
     if (token !== null && data !== null) {
       AsyncStorage.setItem(
@@ -66,7 +67,7 @@ class CalendarService {
     }
   };
 
-  
+
 }
 
 export default CalendarService;

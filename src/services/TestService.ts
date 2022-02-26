@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getTokenAPI } from "../api/authenticationAPI";
-import testAPI from "../api/testAPI";
+import { getToken } from "../api/authentication";
+import test from "../api/test";
 import { extractTestData } from "../utils/testUtils";
 import { UserService } from "./UserService";
 
@@ -20,8 +20,8 @@ export class TestService {
     data: TestModel[];
     lastUpdate: number;
   } | null> => {
-    const token = await getTokenAPI();
-    const data = await testAPI(token);
+    const token = await getToken();
+    const data = await test(token);
     const userId = (await this.getUserInfo()).id;
     if (token !== null && data !== null) {
       const extracted = extractTestData(data);
@@ -51,8 +51,8 @@ export class TestService {
     if (db !== null) {
       return JSON.parse(db);
     } else {
-      const token = await getTokenAPI();
-      const data = await testAPI(token);
+      const token = await getToken();
+      const data = await test(token);
 
       if (token !== null && data !== null) {
         const extracted = extractTestData(data);
